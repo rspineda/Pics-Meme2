@@ -149,15 +149,18 @@ class MemeEditorViewController: UIViewController,  UITextFieldDelegate, UIImageP
             
     }
     
+    func hideAndShowBars(isEnabled: Bool) {
+            self.topToolBar.isHidden = isEnabled
+            self.bottomToolBar.isHidden = isEnabled
+        }
+    
     func generateMeme() -> UIImage {
-            self.topToolBar.isHidden = true
-            self.bottomToolBar.isHidden = true
+            hideAndShowBars(isEnabled: true)
             UIGraphicsBeginImageContext(self.view.frame.size)
             view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
             let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
             UIGraphicsEndImageContext()
-            self.topToolBar.isHidden = false
-            self.bottomToolBar.isHidden = false
+            hideAndShowBars(isEnabled: false)
             return memedImage
             
         }
